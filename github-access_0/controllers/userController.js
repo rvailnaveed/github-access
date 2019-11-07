@@ -1,7 +1,11 @@
+var fetch = require('node-fetch');
+//var plotly = require('plotly')
+
+
 exports.get_user = (req, res) => {
     var user = req.params.user;
     var name = "";
- 
+    
     fetch('https://api.github.com/users/' + user)
         .then(
             function(response) {
@@ -9,7 +13,7 @@ exports.get_user = (req, res) => {
                     console.log(response.status);
                     return;
                 }
-                response.json().then(function(data) {
+                response.json().then(data => {
                     name = data.name
                     res.render('user', { title: 'Welcome, ' + name, name: name });
                 });
@@ -21,9 +25,10 @@ exports.get_user = (req, res) => {
         });
 };
 
-exports.get_repos = (req, res) => {
-    var user = req.params.user;
 
+exports.get_repos_graph = (req, res) => {
+    var user = req.params.user;
+    
     fetch('https://api.github.com/users/' + user + '/repos')
         .then(
             function(response) {
@@ -32,7 +37,13 @@ exports.get_repos = (req, res) => {
                     return;
                 }
                 response.json().then(function(data) {
-                    res.send(data);
+                    var amount = Object.keys(data).length;
+                    var repos = [];
+                    for(var i = 0; i < amount; i++){
+                        repos.push(data[i].name);
+                    }
+                    console.log(repos)
+                    res.render('user', { title: "User Insights", amount: amount });
                 });
             }   
 
@@ -44,7 +55,7 @@ exports.get_repos = (req, res) => {
 
 exports.get_commits = (req, res) => {
     var user = req.params.user;
-    
+
     fetch('https://api.github.com/users/' + user + '/repos')
         .then(
             function(response) {
