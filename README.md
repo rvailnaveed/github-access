@@ -1,5 +1,5 @@
 # github-access
-Basic Implementation serving as the starting point for the Github Social Graph Project
+Basic Implementation serving as the starting point for the [Github Social Graph Project](https://github.com/rvailnaveed/github-social-graph)
 
 ## Instructions
 +   Clone or download the repo: `git clone https://github.com/rvailnaveed/github-access.git`
