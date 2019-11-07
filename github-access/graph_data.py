@@ -3,6 +3,10 @@ import plotly.graph_objects as go
 import plotly
 from pprint import pprint
 
+import test
+
+test.data_to_csv()
+
 repos = pd.read_csv('repos_info.csv')
 commits = pd.read_csv('commits_info.csv')
 
